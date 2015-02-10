@@ -9,7 +9,7 @@ The TDD process typically follows this standard routine:
 4. If a test fails, change or add implementation so that the test no longer fails. If it fails, go back to test 3. If it passes, move on to the next test. 
 5. If all tests succeed, you have successfully implemented the interface/features.
 
-Of course, if at a later time you realize you need additional tests, simply write more tests for the interface and repeat steps 3 through 5.
+Of course, if at a later time you realize you need additional tests, simply write more tests for the interface and repeat steps 3 through 5. (Although, ideally, code should conform to tests, not the other way around.)
 
 #How Tests Work
 Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations. For example, you can write a simple a simple test that verifies that your add function works correctly:
