@@ -1,4 +1,4 @@
-# frisk
+#Overview
 Frisk is a simple but powerful Test Driven Development (TDD) framework for C++ projects of all sizes. TDD is an excellent development ideology in which the developer first writes tests and then writes code in order to satisfy the tests. It prevents horrible bugs from becoming deeply embedded in large projects and allows the debugging and isolation of problematic code before it is pushed to production.
 
 The TDD process typically follows this standard routine: 
@@ -10,3 +10,21 @@ The TDD process typically follows this standard routine:
 5. If all tests succeed, you have successfully implemented the interface/features.
 
 Of course, if at a later time you realize you need additional tests, simply write more tests for the interface and repeat steps 3 through 5.
+
+#How Tests Work
+Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations. For example, you can write a simple a simple test that verifies that your add function works correctly:
+
+```C++
+void test_add()
+{
+  Frisk::ExpectEquals(add(5, 5), 10, "Doubling a number");
+  Frisk::ExpectEquals(add(10, 12), 22, "Adding two even numbers");
+  Frisk::ExpectEquals(add(3, 5), 8, "Adding two odd numbers");
+  Frisk::ExpectEquals(add(3, 6), 9, "Adding one even and one odd number");
+  Frisk::ExpectEquals(add(-2, 10), 8, "Adding a negative number to a positive number");
+}
+```
+
+When Frisk runs this test (this is considered just one test with multiple expectations), it will check to make sure all of the expectations are met. If any expectation is NOT met, then it will display the provided message that corresponds to the failed expectation as well as an indication that it failed. For example, it might display:
+
+"FAILED EXPECTATION: Adding two odd numbers"
