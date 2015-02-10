@@ -27,4 +27,14 @@ void test_add()
 
 When Frisk runs this test (this is considered just one test with multiple expectations), it will check to make sure all of the expectations are met. If any expectation is NOT met, then it will display the provided message that corresponds to the failed expectation as well as an indication that it failed. For example, it might display:
 
-"FAILED EXPECTATION: Adding two odd numbers"
+"FAILED 'add' TEST: Adding two odd numbers"
+
+This shows that our test named 'add' failed because it did not add two odd numbers correctly.
+
+#Powerful
+The power of Frisk lies in its ability to handle many configurations of tests. Below is a list of some of the features that make Frisk an amazing TDD framework:
+
+1. Large variety of expectations (equality, inequality, logical comparisons, bitwise comparisons) on a variety of types of data (arrays, ranges, strings, numbers, etc.)
+2. The ability to customize how failed tests are handled (i.e. critical -- stop testing and emphasize this failure, warning -- simply give a warning and continue, etc.)
+3. The ability to group tests into "test suites" and the ability to control how failed test suites are handled.
+4. Much more!
