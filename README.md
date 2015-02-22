@@ -23,7 +23,7 @@ void test_add(Frisk::Test &self)
   self.ExpectEquals(add(3, 6), 9, "Adding one even and one odd number");
   self.ExpectEquals(add(-2, 10), 8, "Adding a negative number to a positive number");
   
-  // It is also possible to manually write your own tests.
+  // It is also possible to manually control when a test fails.
   if (add(5, 5) != 10) {
     self.Fail("Double a number");
   }
