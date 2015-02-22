@@ -15,15 +15,14 @@ Of course, if at a later time you realize you need additional tests, simply writ
 Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations. For example, you can write a simple a simple test that verifies that your add function works correctly:
 
 ```C++
-void test_add(Frisk::TestResult *result)
+void test_add(Frisk::Test &self)
 {
-  Frisk::BeginTest(result);
-  Frisk::ExpectEquals(add(5, 5), 10, "Doubling a number");
-  Frisk::ExpectEquals(add(10, 12), 22, "Adding two even numbers");
-  Frisk::ExpectEquals(add(3, 5), 8, "Adding two odd numbers");
-  Frisk::ExpectEquals(add(3, 6), 9, "Adding one even and one odd number");
-  Frisk::ExpectEquals(add(-2, 10), 8, "Adding a negative number to a positive number");
-  Frisk::EndTest();
+  self.ExpectEquals(add(5, 5), 10, "Doubling a number");
+  self.ExpectEquals(add(10, 12), 22, "Adding two even numbers");
+  self.ExpectEquals(add(3, 5), 8, "Adding two odd numbers");
+  self.ExpectEquals(add(3, 6), 9, "Adding one even and one odd number");
+  self.ExpectEquals(add(-2, 10), 8, "Adding a negative number to a positive number");
+ 
 }
 ```
 
