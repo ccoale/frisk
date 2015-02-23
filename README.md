@@ -1,6 +1,8 @@
 #Overview
 Frisk is a simple but powerful Test Driven Development (TDD) framework for C++ projects of all sizes. TDD is an excellent development ideology in which the developer first writes tests and then writes code in order to satisfy the tests. It prevents horrible bugs from becoming deeply embedded in large projects and allows the debugging and isolation of problematic code before it is pushed to production.
 
+At the moment Frisk focuses specifically on unit-testing without mock objects.  Mock objects are a possible feature for a later version.
+
 The TDD process typically follows this standard routine: 
 
 1. Design an interface/feature.
