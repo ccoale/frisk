@@ -14,29 +14,7 @@ The TDD process typically follows this standard routine:
 Of course, if at a later time you realize you need additional tests, simply write more tests for the interface and repeat steps 3 through 5. (Although, ideally, code should conform to tests, not the other way around.)
 
 #How Tests Work
-Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations. For example, you can write a simple a simple test that verifies that your add function works correctly:
-
-```C++
-void test_add(Frisk::Test &self)
-{
-  self.ExpectEquals(add(5, 5), 10, "Doubling a number");
-  self.ExpectEquals(add(10, 12), 22, "Adding two even numbers");
-  self.ExpectEquals(add(3, 5), 8, "Adding two odd numbers");
-  self.ExpectEquals(add(3, 6), 9, "Adding one even and one odd number");
-  self.ExpectEquals(add(-2, 10), 8, "Adding a negative number to a positive number");
-  
-  // It is also possible to manually control when a test fails.
-  if (add(5, 5) != 10) {
-    self.Fail("Double a number");
-  }
-}
-```
-
-When Frisk runs this test (this is considered just one test with multiple expectations), it will check to make sure all of the expectations are met. If any expectation is NOT met, then it will display the provided message that corresponds to the failed expectation as well as an indication that it failed. For example, it might display:
-
-"FAILED 'add' TEST: Adding two odd numbers"
-
-This shows that our test named 'add' failed because it did not add two odd numbers correctly. While it may seem strange to have a "BeginTest" and "EndTest" function call inside the test, it is important because it allows the framework to internally initialize a given test and also stack error results. The BeginTest function also allows for configuration of how errors should be handled (i.e. quit at first error, continue to last, etc.). 
+Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations.
 
 
 #Powerful
