@@ -3,7 +3,7 @@
 
 #include "frisk_config.h"
 #include "FailureInfo.h"
-#include "test.h"
+#include "Test.h"
 #include "expectations.h"
 #include "TestCollection.h"
 #include "Reporter.h"
