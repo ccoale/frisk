@@ -2,7 +2,7 @@
 #define _REPORTER_H
 
 #include "frisk_config.h"
-#include "test.h"
+#include "Test.h"
 #include "TestCollection.h"
 
 namespace Frisk

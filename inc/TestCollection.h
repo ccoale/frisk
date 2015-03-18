@@ -1,7 +1,7 @@
-#ifndef _TEST_COLLETION_H
-#define _TEST_COLLETION_H
+#ifndef _TEST_COLLECTION_H
+#define _TEST_COLLECTION_H
 
-#include "test.h"
+#include "Test.h"
 #include <functional>
 #include "Reporter.h"
 
