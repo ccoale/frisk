@@ -14,7 +14,10 @@
 	}; } while (0);
 
 #define EXPECT_FORCE_FAIL(test, msg) \
-	FRISK_BASE_EXPECTATION(test, false, ("forced failure"), (msg))
+	FRISK_BASE_EXPECTATION(test, false, ("Forced failure."), (msg))
+
+#define EXPECT_IMPLEMENTED(test, msg) \
+  FRISK_BASE_EXPECTATION(test, false, ("Expected test to be implemented, but it isn't."), (msg))
 
 // BELOW ARE DEFINITIONS FOR PRIMITIVE EXPECTATIONS
 // Primitive expectations should only be used on types that implement
