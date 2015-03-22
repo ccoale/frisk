@@ -14,8 +14,7 @@ The TDD process typically follows this standard routine:
 Of course, if at a later time you realize you need additional tests, simply write more tests for the interface and repeat steps 3 through 5. (Although, ideally, code should conform to tests, not the other way around.)
 
 #How Tests Work
-Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations.
-
+Frisk tests are very simple concepts. They are simply functions that do not return any value, but rather assert expectations. For specific examples and documentation, please see the wiki pages.
 
 #Powerful
 The power of Frisk lies in its ability to handle many configurations of tests. Below is a list of some of the features that make Frisk an amazing TDD framework:
