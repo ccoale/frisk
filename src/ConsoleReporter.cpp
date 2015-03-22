@@ -27,14 +27,18 @@ namespace Frisk
 
 	void ConsoleReporter::setConsoleTextColor(unsigned int color)
 	{
-#ifdef _WIN32
-		WORD real_colors[] = { FOREGROUND_RED | FOREGROUND_INTENSITY, FOREGROUND_GREEN | FOREGROUND_INTENSITY, 
-			FOREGROUND_BLUE | FOREGROUND_INTENSITY, this->csbi.wAttributes };
 		if (color > 3)
 			return;
 
+#ifdef _WIN32
+		WORD real_colors[] = { FOREGROUND_RED | FOREGROUND_INTENSITY, FOREGROUND_GREEN | FOREGROUND_INTENSITY, 
+			FOREGROUND_BLUE | FOREGROUND_INTENSITY, this->csbi.wAttributes };
+
 		WORD attr = real_colors[color];
 		SetConsoleTextAttribute(this->hStdOut, attr);
+#else
+    int real_colors[] = { 31, 32, 34, 39 };
+    std::cout << "\033[" << real_colors[color] << "m";
 #endif
 	}
 
