@@ -20,6 +20,11 @@ namespace Frisk
 	protected:
 		std::map<std::string, unsigned int> colorScheme;
 		std::map<std::string, bool> options;
+    int testsRun;
+    int testsPassed;
+    int testsFailed;
+    int testsPending;
+
 	private:
 		void setConsoleTextColor(unsigned int color);
 #ifdef _WIN32
