@@ -22,21 +22,10 @@ DEF_TEST(mult_test)
   EXPECT_LESS(self, mult(-5, 5), 0, "One negative times one positive should be negative.");
 }
 
-class myClass
-{
-public:
-  DEF_TEST(myTest)
-  {
-    BEGIN_TEST(self);
-    EXPECT_EQUAL(self, 10, 25, "should be equal!");
-  }
-};
-
 int main()
 {
 	Frisk::TestCollection tests;
   tests.addTest(mult_test, "mult_test");
-  tests.addTest(myClass::myTest, "myClass::myTest");
 
 	Frisk::ConsoleReporter reporter;
   reporter.setOption("description", true);
