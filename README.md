@@ -1,3 +1,7 @@
+#Build Status
+Each merge/push to master (and pull request) automatically runs a build using Travis-CI. Below is the build status of the last build (built using gmake, cmake, clang, and g++):
+![Last build status](https://travis-ci.org/ccoale/frisk.svg)
+
 #Overview
 Frisk is a simple but powerful Test Driven Development (TDD) framework for C++ projects of all sizes. TDD is an excellent development ideology in which the developer first writes tests and then writes code in order to satisfy the tests. It prevents horrible bugs from becoming deeply embedded in large projects and allows the debugging and isolation of problematic code before it is pushed to production.
 
