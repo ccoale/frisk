@@ -1,5 +1,2 @@
 # Ignore local build directory
 build/*
-*.py~
-*.cpp~
-*.h~

@@ -6,18 +6,21 @@
 #define _EXPECTATIONS_H
 #include "frisk_config.h"
 
+#define REPEAT(n) \
+  for (unsigned int _temp_frisk_counter_i = 0; _temp_frisk_counter_i < (n); _temp_frisk_counter_i++)
+
 #define FRISK_BASE_EXPECTATION(test, result, desc, msg) do { \
 	if ((test).getOption(FRISK_OPTION_CONTINUE)) { \
-		if ( !(result) ) (test).addFailure( __FILE__, (msg), __LINE__); \
+		if ( !(result) ) (test).addFailure( __FILE__, (msg), (desc), __LINE__); \
 	} else { \
-		if ( !(result) ) (test).addFailure(__FILE__, (msg), __LINE__); return; \
+		if ( !(result) ) (test).addFailure(__FILE__, (msg), (desc), __LINE__); return; \
 	}; } while (0);
 
 #define EXPECT_FORCE_FAIL(test, msg) \
 	FRISK_BASE_EXPECTATION(test, false, ("Forced failure."), (msg))
 
 #define EXPECT_IMPLEMENTED(test, msg) \
-  FRISK_BASE_EXPECTATION(test, false, ("Expected test to be implemented, but it isn't."), (msg))
+  FRISK_BASE_EXPECTATION(test, false, (msg), ("Expected test to be implemented, but it isn't."))
 
 // BELOW ARE DEFINITIONS FOR PRIMITIVE EXPECTATIONS
 // Primitive expectations should only be used on types that implement
@@ -113,6 +116,14 @@
 
 #define EXPECT_CSTRING_LENGTH_NOTEQUAL(test, a, b, desc) \
 	FRISK_BASE_EXPECTATION(test, ( (strlen( (a) ) != strlen( (b) )) ), (desc), ("Expected string length of " #a " to not equal string length of " #b ", but they were equal."))
+
+// c-string equality with case-sensitive
+#define EXPECT_CSTRING_EQUAL(test, a, b, max, desc) \
+  FRISK_BASE_EXPECTATION(test, ( (strncmp((a), (b), (max)) == 0)), (desc), ("Expected string " #a " to equal string " #b ", but they were not equal."))
+
+#define EXPECT_CSTRING_NOTEQUAL(test, a, b, max, desc) \
+  FRISK_BASE_EXPECTATION(test, ( (strncmp((a), (b), (max)) != 0)), (desc), ("Expected string " #a " to not equal string " #b ", but they were equal."))
+
 
 
 #endif /* _EXPECTATIONS_H */

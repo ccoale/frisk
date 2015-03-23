@@ -2,37 +2,45 @@
 #include "../inc/Frisk.h"
 #include "../inc/ConsoleReporter.h"
 
-DEF_TEST(myAddTest)
+int mult(int x, int y) { return x * y; }
+
+DEF_TEST(mult_test)
 {
-	BEGIN_TEST(self);
-	self.setOption(FRISK_OPTION_CONTINUE, true);
-	self.setOption(FRISK_OPTION_PENDING, true);
-	EXPECT_EQUAL(self, (10 + 15), 15, "make sure a + b works");
-	EXPECT_EQUAL(self, (10 + 10), 25, "make sure a + a is actually 2a");
+  BEGIN_TEST(self);
+
+  self.setOption(FRISK_OPTION_CONTINUE, true);
+
+  EXPECT_EQUAL(self, mult(0, 0), 0, "0 times anything should be 0");
+  EXPECT_EQUAL(self, mult(0, 5), 0, "0 times anything should be 0");
+  EXPECT_EQUAL(self, mult(5, 0), 0, "0 times anything should be 0");
+  EXPECT_EQUAL(self, mult(1, 5), 5, "1 times anything is itself");
+  EXPECT_EQUAL(self, mult(5, 1), 5, "1 times anything is itself");
+  EXPECT_EQUAL(self, mult(5, 5), 25, "5 times itself is its square");
+  EXPECT_EQUAL(self, mult(1, -5), -5, "1 times a negative number is that negative number");
+  EXPECT_EQUAL(self, mult(-5, 1), -5, "1 times a negative number is that negative number");
+  EXPECT_GREATER(self, mult(-5, -5), 0, "Two negatives mutlipled should be positive.");
+  EXPECT_LESS(self, mult(-5, 5), 0, "One negative times one positive should be negative.");
 }
 
-DEF_TEST(myArrayTest)
+class myClass
 {
-	BEGIN_TEST(self);
-	self.setOption(FRISK_OPTION_CONTINUE, true);
-	self.setOption(FRISK_OPTION_QUIET, true);
-	int arr1[] = { 1, 2, 3 };
-	int arr2[] = { 1, 2, 4 };
-	EXPECT_ARRAY_NOTEQUAL(self, arr1, arr2, 3, 3, "make sure arrays are not equal");
-
-	std::string str1 = "hello world";
-	std::string str2 = "goodbye world";
-	EXPECT_LENGTH_EQUAL(self, str1, str2, "lengths should be the same");
-	EXPECT_CSTRING_LENGTH_EQUAL(self, "heffllo", "world", "length should be the same");
-}
+public:
+  DEF_TEST(myTest)
+  {
+    BEGIN_TEST(self);
+    EXPECT_EQUAL(self, 10, 25, "should be equal!");
+  }
+};
 
 int main()
 {
 	Frisk::TestCollection tests;
-	tests.addTest(myAddTest, "myAddTest");
-	tests.addTest(myArrayTest, "myArrayTest");
+  tests.addTest(mult_test, "mult_test");
+  tests.addTest(myClass::myTest, "myClass::myTest");
+
 	Frisk::ConsoleReporter reporter;
+  reporter.setOption("description", true);
 	std::list<Frisk::Test> results = tests.runTests(false, &reporter);
 
-	return 0;
+	return 1;
 }
