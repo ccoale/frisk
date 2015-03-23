@@ -86,6 +86,23 @@ namespace Frisk
 	}
 
 	/**
+	* Adds a new failure to the existing queue of failures.
+	*/
+	void Test::addFailure(const std::string &fileName, const std::string &message, const std::string &desc, unsigned int lineNo)
+	{
+		FailureInfo failure;
+		failure.fileName = fileName;
+		failure.message = message;
+		failure.testName = this->name;
+		if (failure.testName == "")
+			failure.testName = "<unknown>";
+    failure.description = desc;
+		failure.lineNo = lineNo;
+		this->failureCount += 1;
+		this->failures.push_back(failure);
+	}
+
+	/**
 	* Gets the number of failures in the list of failures.
 	*/
 	unsigned int Test::getFailureCount() const

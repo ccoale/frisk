@@ -24,6 +24,11 @@ namespace Frisk
 		*/
 		std::string message;
 
+    /**
+    * User-provided description of the expectation that failed.
+    */
+    std::string description;
+
 		/**
 		* The line number on which the test failed.
 		*/

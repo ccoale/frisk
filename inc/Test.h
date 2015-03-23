@@ -29,7 +29,7 @@
  * Defines a test using the given arguments. 
  */
 #define DEF_TEST(name)\
-	void name(Frisk::Test &self)
+	static void name(Frisk::Test &self)
 
 #define BEGIN_TEST(test)\
 	(test).initialize(__FUNCTION__, __FILE__, __LINE__, 0)
@@ -106,6 +106,11 @@ namespace Frisk
 		virtual bool getOption(unsigned int option) const;
 
 		/**
+		 * Adds a new failure to the existing queue of failures.
+		 */
+		virtual void addFailure(const std::string &fileName, const std::string &message, const std::string &desc, unsigned int lineNo);
+
+    /**
 		 * Adds a new failure to the existing queue of failures.
 		 */
 		virtual void addFailure(const std::string &fileName, const std::string &message, unsigned int lineNo);
