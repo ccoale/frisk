@@ -23,3 +23,5 @@ The power of Frisk lies in its ability to handle many configurations of tests. B
 2. The ability to customize how failed tests are handled (i.e. critical -- stop testing and emphasize this failure, warning -- simply give a warning and continue, etc.)
 3. The ability to group tests into "test suites" and the ability to control how failed test suites are handled.
 4. Much more!
+
+(Added travis support test)
