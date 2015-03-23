@@ -13,6 +13,10 @@ namespace Frisk
 		this->setColor("section", CONSOLE_COLOR_BLUE);
 		this->setColor("text", CONSOLE_COLOR_DEFAULT);
 		this->setOption("verbose", true);
+    this->testsRun = 0;
+    this->testsPassed = 0;
+    this->testsFailed = 0;
+    this->testsPending = 0;
 
 #ifdef _WIN32
 		this->hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -59,8 +63,14 @@ namespace Frisk
 
 	void ConsoleReporter::onPreRun(const Frisk::Test &test)
 	{
-		this->setConsoleTextColor(this->colorScheme["text"]);
-		if (test.getOption(FRISK_OPTION_PENDING))
+		
+	}
+
+	void ConsoleReporter::onPostRun(const Frisk::Test &test)
+	{
+    this->setConsoleTextColor(this->colorScheme["text"]);
+		
+    if (test.getOption(FRISK_OPTION_PENDING) != 0)
 			std::cout << "Pending test '";
 		else
 			std::cout << "Running test '";
@@ -70,18 +80,23 @@ namespace Frisk
 		std::cout.flush();
 		this->setConsoleTextColor(this->colorScheme["text"]);
 		std::cout << "'... ";
-		if (test.getOption(FRISK_OPTION_PENDING))
+		if (test.getOption(FRISK_OPTION_PENDING) != 0)
 		{
 			this->setConsoleTextColor(this->colorScheme["pass"]);
 			std::cout << "[SKIPPED]" << std::endl;
 			this->setConsoleTextColor(this->colorScheme["text"]);
 		}
 		std::cout.flush();
-	}
 
-	void ConsoleReporter::onPostRun(const Frisk::Test &test)
-	{
-		if (test.getOption(FRISK_OPTION_PENDING) == 0 && test.getFailureCount() != 0) {
+    this->testsRun++;
+
+    if (test.getOption(FRISK_OPTION_PENDING) != 0)
+    {
+      this->testsPending++;
+    } 
+    else if (test.getOption(FRISK_OPTION_PENDING) == 0 && test.getFailureCount() != 0) 
+    {
+      this->testsFailed++;
 			this->setConsoleTextColor(this->colorScheme["fail"]);
 			std::cout << "[FAILED]" << std::endl;
 			this->setConsoleTextColor(this->colorScheme["text"]);
@@ -100,7 +115,14 @@ namespace Frisk
 				while (it != test.getFailureIteratorEnd())
 				{
 					Frisk::FailureInfo info = (*it);
-					std::cout << "\t[Ln " << info.lineNo << "]: " << info.message << "\n";
+          if (this->options["description"])
+          {
+					  std::cout << "\t[" << info.description << " | Ln " << info.lineNo << "]: " << info.message << "\n";
+          }
+          else
+          {
+					  std::cout << "\t[Ln " << info.lineNo << "]: " << info.message << "\n";
+          }
 					it++;
 				}
 			}
@@ -108,12 +130,22 @@ namespace Frisk
 			this->setConsoleTextColor(this->colorScheme["pass"]);
 			std::cout << "[PASSED]" << std::endl;
 			this->setConsoleTextColor(this->colorScheme["text"]);
+      this->testsPassed++;
 		}
 	}
 
 	void ConsoleReporter::onComplete()
 	{
 		this->setConsoleTextColor(this->colorScheme["text"]);
-		std::cout << "Test complete." << "\n";
+		std::cout << "Test complete [" << this->testsRun << " TOTAL, ";
+    this->setConsoleTextColor(this->colorScheme["pass"]);
+    std::cout << this->testsPassed << " PASSED, ";
+    if (this->testsFailed != 0) {
+      this->setConsoleTextColor(this->colorScheme["fail"]);
+    }
+    std::cout << this->testsFailed << " FAILED, ";
+    this->setConsoleTextColor(this->colorScheme["pass"]);
+    std::cout << this->testsPending << " PENDING]\n";
+    this->setConsoleTextColor(this->colorScheme["text"]);
 	}
 }
