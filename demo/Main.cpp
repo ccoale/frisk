@@ -31,5 +31,11 @@ int main()
   reporter.setOption("description", true);
 	std::list<Frisk::Test> results = tests.runTests(false, &reporter);
 
-	return 1;
+	for (std::list<Frisk::Test>::iterator it = results.begin(); it != results.end(); it++)
+  {
+    if ((*it).getFailureCount() != 0)
+      return 1;
+  }
+
+  return 0;
 }
