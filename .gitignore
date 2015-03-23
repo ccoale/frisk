@@ -3,3 +3,8 @@ build/*
 *.py~
 *.cpp~
 *.h~
+*.md~
+*.yml~
+*.xml~
+*.txt~
+*.hpp~
