@@ -18,5 +18,5 @@ install:
 script:
   - mkdir build
   - cd build && cmake ..
-  - cd demo && make
-  - ./demo
+  - cd tests && make
+  - ./test

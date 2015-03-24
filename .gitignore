@@ -8,3 +8,4 @@ build/*
 *.xml~
 *.txt~
 *.hpp~
+*.gitignore~

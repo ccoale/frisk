@@ -11,9 +11,9 @@
 
 #define FRISK_BASE_EXPECTATION(test, result, desc, msg) do { \
 	if ((test).getOption(FRISK_OPTION_CONTINUE)) { \
-		if ( !(result) ) (test).addFailure( __FILE__, (msg), (desc), __LINE__); \
+		if ( !(result) ) { (test).addFailure( __FILE__, (msg), (desc), __LINE__); } \
 	} else { \
-		if ( !(result) ) (test).addFailure(__FILE__, (msg), (desc), __LINE__); return; \
+		if ( !(result) ) { (test).addFailure(__FILE__, (msg), (desc), __LINE__); return; } \
 	}; } while (0);
 
 #define EXPECT_FORCE_FAIL(test, msg) \
@@ -89,6 +89,14 @@
 		FRISK_BASE_EXPECTATION(test, !(is_equal), (desc), ("Expected array " #a " to not equal array " #b ", but they were equal.")); \
 	}
 
+#define EXPECT_ARRAY_CONTAINS(test, a, len, val, desc) \
+  do { \
+    bool _frisk_result = false; \
+    for (int i = 0; i < len; i++) { \
+      if ((a)[i] == (val)) { _frisk_result = true; break; }\
+    }\
+    FRISK_BASE_EXPECTATION((test), _frisk_result, (desc), ("Expected array " #a " to contain value " #val ", but it didn't."));\
+  } while(0);
 
 
 // Strings/lists that implement "length", "count", or "size" method

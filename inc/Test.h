@@ -25,11 +25,20 @@
  */
 #define FRISK_OPTION_PENDING	0x02
 
+
+
+#define TEST_OPTION(test, opt, val)\
+  (test).setOption( (opt), (val) );\
+  if ( (opt) == FRISK_OPTION_PENDING && (val)) return;
+
 /**
  * Defines a test using the given arguments. 
  */
 #define DEF_TEST(name)\
-	static void name(Frisk::Test &self)
+	void name(Frisk::Test &self)
+
+#define DEF_TEST_METHOD(name)\
+  static void name(Frisk::Test &self)
 
 #define BEGIN_TEST(test)\
 	(test).initialize(__FUNCTION__, __FILE__, __LINE__, 0)

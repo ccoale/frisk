@@ -5,7 +5,7 @@ namespace Frisk
 	/**
 	* Initializes a new instance of TestCollection.
 	*/
-	TestCollection::TestCollection()
+	TestCollection::TestCollection() : lastFailCount(0)
 	{
 
 	}
@@ -39,6 +39,8 @@ namespace Frisk
 	*/
 	std::list<Frisk::Test> TestCollection::runTests(bool failfast, Reporter *reporter)
 	{
+    this->lastFailCount = 0;
+
 		std::list<Frisk::Test> result;
 		if (reporter != nullptr)
 			reporter->onStart(*this);
@@ -54,6 +56,8 @@ namespace Frisk
 
 			if (reporter != nullptr)
 				reporter->onPostRun((*it).test);
+ 
+      this->lastFailCount += (*it).test.getFailureCount();
 
 			// only quit if failfast AND the test is NOT pending.
 			if (failfast && ((*it).test.getFailureCount() != 0) && ((*it).test.getOption(FRISK_OPTION_PENDING) == 0))
@@ -67,4 +71,12 @@ namespace Frisk
 
 		return result;
 	}
+
+    /**
+     * Returns the number of failures in the last run of tests.
+     */
+    int TestCollection::getLastFailCount() const
+    {
+      return this->lastFailCount;
+    }
 }

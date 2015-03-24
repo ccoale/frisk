@@ -21,6 +21,11 @@ namespace Frisk
 		 */
 		std::list<TestCollection::TestFuncPair> tests;
 
+    /**
+     * The number of failures in the last run of tests.
+     */
+    int lastFailCount;
+
 	public:
 		/**
 		 * Initializes a new instance of TestCollection.
@@ -45,6 +50,11 @@ namespace Frisk
 		 * @returns A list of Test objects.
 		 */
 		virtual std::list<Frisk::Test> runTests(bool failfast = true, Reporter *reporter = nullptr);
+
+    /**
+     * Returns the number of failures in the last run of tests.
+     */
+    virtual int getLastFailCount() const;
 	};
 }
 
