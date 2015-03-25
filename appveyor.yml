@@ -1,0 +1,8 @@
+install:
+
+build:
+build_script:
+  - md build
+  - cd build
+  - cmake -G "Visual Studio 12 2013" ..
+  - nmake /f makefile
