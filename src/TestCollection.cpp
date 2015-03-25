@@ -1,4 +1,5 @@
 #include "../inc/TestCollection.h"
+#include <stdexcept>
 
 namespace Frisk
 {
@@ -51,7 +52,16 @@ namespace Frisk
 			if (reporter != nullptr)
 				reporter->onPreRun((*it).test);
 
-			(*it).func((*it).test);
+      try
+      {
+			  (*it).func((*it).test);
+      }
+      catch(std::exception &ex)
+      {
+        std::string msg = std::string(ex.what());
+        (*it).test.addFailure((*it).test.getFileName(), std::string("Unexpected exception was caught: ") + msg, "Unexpected exception", (*it).test.getLineNo());
+      }
+
 			result.push_back((*it).test);
 
 			if (reporter != nullptr)
