@@ -119,7 +119,7 @@ def createTests(funcDict, targetDir, sourceDir):
       outFile.write("    DEF_TEST(" + funcName + "_test)\n")
       outFile.write("    {\n")
       outFile.write("      BEGIN_TEST(self);\n")
-      outFile.write("      self.setOption(FRISK_OPTION_PENDING, true);\n")
+      outFile.write("      TEST_OPTION(self, FRISK_OPTION_PENDING, true);\n")
       outFile.write("      /* implement your tests for " + funcName.replace("_", "::") + "! */\n")
       outFile.write("    }\n\n")
 
